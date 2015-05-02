@@ -1,0 +1,58 @@
+/*
+	ESTILOS DE LAYOUT
+	==================
+*/
+.centrar-caja{
+	display: block;
+	clear: both;
+	float: none !important;
+	margin: 0 auto !important;
+}
+
+.centrar-texto,
+.centrar-contenido {
+	text-align: center;
+}
+
+.izquierda-texto,
+.izquierda-contenido {
+	text-align: left ;
+}
+
+.derecha-texto,
+.derecha-contenido {
+	text-align: right;
+}
+
+.left, .izquierda {
+	float: left;
+}
+
+.right, .derecha {
+	float: right;
+}
+
+/* 	NO PADDING
+	===========
+	class="no-padding" al grupo, le da padding cero a todas sus cajas.
+	class="no-padding" a la caja le da padding cero solo a ella
+*/
+.no-padding.grupo > .caja,
+.caja.no-padding {
+	padding: 0 !important;
+}
+
+/* Controlar el padding*/
+.padding {
+	padding-left: ($caja--separacion / 2);
+	padding-right: ($caja--separacion / 2);
+}
+
+.padding-2 {
+	padding-left: $caja--separacion;
+	padding-right: $caja--separacion;
+}
+.padding-3 {
+	padding-left: $caja--separacion * 1.5;
+	padding-right: $caja--separacion * 1.5;
+}
