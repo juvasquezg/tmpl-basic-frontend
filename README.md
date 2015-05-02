@@ -1,4 +1,4 @@
-# Portafolio Personal
+# FrontEnd Basic Development
 
 
 ## Overview
@@ -8,10 +8,10 @@ This exercise will have the candidate build a responsive site navigation driven 
 Technology
 ------------
 
-| On The Server | On The Client  | Development |
-| ------------- | -------------- | ----------- |
-| express       | javascript     | Gulp        |
-|               | stylus         | livereload  |
+ | On The Client  | Development |
+ | -------------- | ----------- |
+ | javascript     | Gulp        |
+ | sass           | livereload  |
 
 
 Requirements
@@ -29,39 +29,15 @@ Installation
 ------------
 
 ```bash
-$ git clone https://github.com/juvasquezg/portafolio.git && cd ./portafolio
+$ git clone https://github.com/juvasquezg/tmpl-basic-frontend.git && cd ./tmpl-basic-frontend
 $ npm install
-$ gulp
+$ npm start
 ```
 
-Development with livereload
-------
-```bash
-gulp
-```
-
-Test
-------
-```bash
-npm test
-```
-
-if you get ** -bash: make: commad not found ** please install make in Unix
-based systems or **run**
-```bash
-./node_modules/.bin/mocha  test/
-```
-
-
-Production
-------
-```bash
-npm start
-```
 
 Note
 ------
-Default port is 3000, sure that this port is available.
+Default port is 8080, sure that this port is available.
 
 You can put the public directory in a [nginx] or [apache] server.
 
