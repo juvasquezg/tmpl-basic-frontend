@@ -8,10 +8,10 @@ This exercise will have the candidate build a responsive site navigation driven 
 Technology
 ------------
 
- | On The Client  | Development |
- | -------------- | ----------- |
- | javascript     | Gulp        |
- | sass           | livereload  |
+| On The Client  | Development |
+| -------------- | ----------- |
+| javascript     | Gulp        |
+| sass           | livereload  |
 
 
 Requirements
