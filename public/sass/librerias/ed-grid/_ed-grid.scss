@@ -2,7 +2,7 @@
 
 	// Ancho máximo de cada grupo
 		$grupo--max-width : 1100px;
-
+		
 	// Separación entre cajas
 		$caja--separacion : 30px;
 
@@ -31,4 +31,3 @@
 	@import "componentes/desarrollo";  // Modo desarrollo
 	@import "componentes/visibilidad"; // Controlar la visibilidad
 	@import "componentes/utilidades";  // Utilidades adicionales
-  @import "main";                    // Custom styles

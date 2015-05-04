@@ -33,7 +33,7 @@ gulp.task('jshint', function() {
 
 // Compile sass to css
 gulp.task('css', function() {
-	gulp.src('./public/sass/ed-grid.scss')
+	gulp.src('./public/sass/estilos.scss')
 		.pipe(sass())
     .pipe(rename('core.min.css'))
 		.pipe(gulp.dest('./public/css/'))
