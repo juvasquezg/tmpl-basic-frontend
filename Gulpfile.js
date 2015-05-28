@@ -2,7 +2,8 @@
 'use strict';
 
 var gulp = require('gulp'),
-		connect   = require('gulp-connect'),
+    gutil = require('gulp-util'),
+    connect   = require('gulp-connect'),
     sass      = require('gulp-sass'),
     rename    = require('gulp-rename'),
 		jshint    = require('gulp-jshint'),
@@ -35,6 +36,7 @@ gulp.task('jshint', function() {
 gulp.task('css', function() {
 	gulp.src('./public/sass/estilos.scss')
 		.pipe(sass())
+    .on('error', gutil.log)
     .pipe(rename('core.min.css'))
 		.pipe(gulp.dest('./public/css/'))
 		.pipe(connect.reload());
