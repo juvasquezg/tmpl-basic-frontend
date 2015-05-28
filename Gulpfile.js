@@ -6,9 +6,9 @@ var gulp = require('gulp'),
     connect   = require('gulp-connect'),
     sass      = require('gulp-sass'),
     rename    = require('gulp-rename'),
-		jshint    = require('gulp-jshint'),
-		stylish   = require('jshint-stylish'),
-		historyApiFallback = require('connect-history-api-fallback');
+    jshint    = require('gulp-jshint'),
+    stylish   = require('jshint-stylish'),
+    historyApiFallback = require('connect-history-api-fallback');
 
 
 // Web server development
