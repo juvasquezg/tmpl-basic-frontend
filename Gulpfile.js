@@ -4,10 +4,11 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     connect   = require('gulp-connect'),
-    sass      = require('gulp-sass'),
-    rename    = require('gulp-rename'),
-    jshint    = require('gulp-jshint'),
-    stylish   = require('jshint-stylish'),
+    jade = require('gulp-jade'),
+    sass = require('gulp-sass'),
+    rename = require('gulp-rename'),
+    jshint = require('gulp-jshint'),
+    stylish = require('jshint-stylish'),
     historyApiFallback = require('connect-history-api-fallback');
 
 
@@ -42,6 +43,15 @@ gulp.task('css', function() {
 		.pipe(connect.reload());
 });
 
+// Compile jade
+gulp.task('jade', function() {
+  gulp.src('./public/**/*.jade')
+    .pipe(jade({
+      pretty: true
+    }))
+    .pipe(gulp.dest('./public/'))
+});
+
 // reload browser if HTML changed
 gulp.task('html', function() {
 	gulp.src('./public/**/*.html')
@@ -52,7 +62,8 @@ gulp.task('html', function() {
 // watch
 gulp.task('watch', function() {
 	gulp.watch(['./public/**/*.html'], ['html']);
-	gulp.watch(['./public/sass/**/*.scss'], ['css']);
+	gulp.watch(['./public/**/*.jade'], ['jade']);
+  gulp.watch(['./public/sass/**/*.scss'], ['css']);
 	gulp.watch(['./public/scripts/**/*.js', './Gulpfile.js'], ['jshint']);
 });
 
