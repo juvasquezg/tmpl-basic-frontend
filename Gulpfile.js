@@ -27,7 +27,7 @@ gulp.task('server', function() {
 
 // Search javascripts errors
 gulp.task('jshint', function() {
-	return gulp.src('./public/scripts/**/*.js')
+	return gulp.src('./public/js/**/*.js')
 		.pipe(jshint('.jshintrc'))
 		.pipe(jshint.reporter('jshint-stylish'))
 		.pipe(jshint.reporter('fail'));
@@ -35,7 +35,7 @@ gulp.task('jshint', function() {
 
 // Compile sass to css
 gulp.task('css', function() {
-	gulp.src('./public/sass/estilos.scss')
+	gulp.src('./public/scss/estilos.scss')
 		.pipe(sass())
     .on('error', gutil.log)
     .pipe(rename('core.min.css'))
@@ -63,8 +63,8 @@ gulp.task('html', function() {
 gulp.task('watch', function() {
 	gulp.watch(['./public/**/*.html'], ['html']);
 	gulp.watch(['./public/**/*.jade'], ['jade']);
-  gulp.watch(['./public/sass/**/*.scss'], ['css']);
-	gulp.watch(['./public/scripts/**/*.js', './Gulpfile.js'], ['jshint']);
+  gulp.watch(['./public/scss/**/*.scss'], ['css']);
+	gulp.watch(['./public/js/**/*.js', './Gulpfile.js'], ['jshint']);
 });
 
 gulp.task('default', ['server', 'css', 'watch']);
