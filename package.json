@@ -1,5 +1,5 @@
 {
-  "name": "ProjectName",
+  "name": "tmpl-basic-frontend",
   "description": "Start basic frontend development",
   "version": "0.0.1",
   "authors": [
@@ -10,11 +10,17 @@
   "bugs": {
     "url": "https://github.com/juvasquezg/tmpl-basic-frontend/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juvasquezg/tmpl-basic-frontend.git"
+  },
   "scripts": {
     "start": "gulp"
   },
   "dependencies": {
-
+    "autoprefixer": "^6.1.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-postcss": "^6.0.1"
   },
   "devDependencies": {
     "connect-history-api-fallback": "0.0.4",

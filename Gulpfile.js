@@ -9,6 +9,9 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     jshint = require('gulp-jshint'),
     stylish = require('jshint-stylish'),
+    plumber = require('gulp-plumber'),
+    postcss = require('gulp-postcss'),
+    autoprefixer = require('autoprefixer'),
     historyApiFallback = require('connect-history-api-fallback');
 
 
@@ -33,23 +36,34 @@ gulp.task('jshint', function() {
 		.pipe(jshint.reporter('fail'));
 });
 
-// Compile sass to css
-gulp.task('css', function() {
-	gulp.src('./public/scss/estilos.scss')
-		.pipe(sass())
-    .on('error', gutil.log)
-    .pipe(rename('core.min.css'))
-		.pipe(gulp.dest('./public/css/'))
-		.pipe(connect.reload());
+
+/**
+ * Compila los archivos sass hijos directos de la carpeta `scss/`.
+ * Agrega los prefijos propietarios de los navegadores.
+ * Los archivos CSS generados se guardan en la carpeta `css/`.
+ */
+gulp.task('sass', function () {
+  var processors = [
+    autoprefixer({ browsers: ['last 2 versions'] })
+  ];
+
+  return gulp.src('./public/scss/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(plumber())
+    .pipe(postcss(processors))
+    .pipe(gulp.dest('./public/css'))
+    .pipe(connect.reload());
 });
 
 // Compile jade
 gulp.task('jade', function() {
-  gulp.src('./public/**/*.jade')
+  gulp.src('./public/jade/*.jade')
+    .pipe(plumber())
     .pipe(jade({
       pretty: true
     }))
     .pipe(gulp.dest('./public/'))
+    .pipe(connect.reload());
 });
 
 // reload browser if HTML changed
@@ -59,12 +73,48 @@ gulp.task('html', function() {
 });
 
 
-// watch
-gulp.task('watch', function() {
-	gulp.watch(['./public/**/*.html'], ['html']);
-	gulp.watch(['./public/**/*.jade'], ['jade']);
-  gulp.watch(['./public/scss/**/*.scss'], ['css']);
-	gulp.watch(['./public/js/**/*.js', './Gulpfile.js'], ['jshint']);
+/**
+ * Ejecuta las tareas connect y sass, queda escuchando los cambios de todos
+ * los archivos Sass de la carpeta `scss/` y subcarpetas.
+ */
+gulp.task('watch:sass', ['server', 'sass'], function () {
+  gulp.watch('./public/scss/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['server', 'css', 'watch']);
+
+/**
+ * Ejecuta las tareas connect y jade, queda escuchando los cambios de todos
+ * los archivos jade de la carpeta `jade/` y subcarpetas.
+ */
+gulp.task('watch:jade', ['server', 'jade'], function () {
+  gulp.watch('./public/jade/**/*.jade', ['jade']);
+});
+
+
+/**
+ * Ejecuta las tareas connect y html, queda escuchando los cambios de todos
+ * los archivos HTML de la carpeta raíz del proyecto.
+ * Creado para quienes no usen Jade.
+ */
+gulp.task('watch:html', ['server', 'html'], function () {
+  gulp.watch('./public/*.html', ['html']);
+});
+
+
+/**
+ * Ejecuta las tareas watch:html y watch:sass
+ * Creado para quienes no usen Jade.
+ */
+gulp.task('watch:html-sass', ['watch:html', 'watch:sass']);
+
+
+/**
+ * Ejecuta las tareas watch:sass y watch:jade.
+ */
+gulp.task('watch:all', ['watch:sass', 'watch:jade']);
+
+
+/**
+ * Ejecuta la tarea watch:sass.
+ */
+gulp.task('default', ['watch:sass']);
